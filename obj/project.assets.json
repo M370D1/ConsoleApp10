@@ -47,6 +47,22 @@
           }
         }
       },
+      "Castle.Core/5.1.1": {
+        "type": "package",
+        "dependencies": {
+          "System.Diagnostics.EventLog": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/Castle.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Castle.Core.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
         "type": "package",
         "compile": {
@@ -318,6 +334,18 @@
           }
         }
       },
+      "Moq/4.20.72": {
+        "type": "package",
+        "dependencies": {
+          "Castle.Core": "5.1.1"
+        },
+        "compile": {
+          "lib/net6.0/Moq.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Moq.dll": {}
+        }
+      },
       "NUnit/4.3.2": {
         "type": "package",
         "compile": {
@@ -339,6 +367,9 @@
         "build": {
           "build/NUnit.props": {}
         }
+      },
+      "NUnit.ConsoleRunner/3.19.0": {
+        "type": "package"
       },
       "NUnit3TestAdapter/4.6.0": {
         "type": "package",
@@ -405,7 +436,7 @@
       "System.Diagnostics.EventLog/8.0.0": {
         "type": "package",
         "compile": {
-          "lib/net8.0/_._": {
+          "lib/net8.0/System.Diagnostics.EventLog.dll": {
             "related": ".xml"
           }
         },
@@ -653,6 +684,30 @@
         "azureicon.png",
         "lib/netstandard2.0/Azure.Identity.dll",
         "lib/netstandard2.0/Azure.Identity.xml"
+      ]
+    },
+    "Castle.Core/5.1.1": {
+      "sha512": "rpYtIczkzGpf+EkZgDr9CClTdemhsrwA/W5hMoPjLkRFnXzH44zDLoovXeKtmxb1ykXK9aJVODSpiJml8CTw2g==",
+      "type": "package",
+      "path": "castle.core/5.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ASL - Apache Software Foundation License.txt",
+        "CHANGELOG.md",
+        "LICENSE",
+        "castle-logo.png",
+        "castle.core.5.1.1.nupkg.sha512",
+        "castle.core.nuspec",
+        "lib/net462/Castle.Core.dll",
+        "lib/net462/Castle.Core.xml",
+        "lib/net6.0/Castle.Core.dll",
+        "lib/net6.0/Castle.Core.xml",
+        "lib/netstandard2.0/Castle.Core.dll",
+        "lib/netstandard2.0/Castle.Core.xml",
+        "lib/netstandard2.1/Castle.Core.dll",
+        "lib/netstandard2.1/Castle.Core.xml",
+        "readme.txt"
       ]
     },
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
@@ -1079,6 +1134,23 @@
         "microsoft.sqlserver.server.nuspec"
       ]
     },
+    "Moq/4.20.72": {
+      "sha512": "EA55cjyNn8eTNWrgrdZJH5QLFp2L43oxl1tlkoYUKIE9pRwL784OWiTXeCV5ApS+AMYEAlt7Fo03A2XfouvHmQ==",
+      "type": "package",
+      "path": "moq/4.20.72",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/net462/Moq.dll",
+        "lib/net6.0/Moq.dll",
+        "lib/netstandard2.0/Moq.dll",
+        "lib/netstandard2.1/Moq.dll",
+        "moq.4.20.72.nupkg.sha512",
+        "moq.nuspec",
+        "readme.md"
+      ]
+    },
     "NUnit/4.3.2": {
       "sha512": "puVXayXNmEu7MFQSUswGmUjOy3M3baprMbkLl5PAutpeDoGTr+jPv33qAYsqxywi2wJCq8l/O3EhHoLulPE1iQ==",
       "type": "package",
@@ -1106,6 +1178,72 @@
         "lib/net8.0/nunit.framework.xml",
         "nunit.4.3.2.nupkg.sha512",
         "nunit.nuspec"
+      ]
+    },
+    "NUnit.ConsoleRunner/3.19.0": {
+      "sha512": "ri9K9xzUyIpaT2LxgfKRC/TLHXdarniTyFvZ7g1o9/J5jLjWK8rDNDMDdi8O+LL4ybFTSLyALUikQ3ayy+YDgw==",
+      "type": "package",
+      "path": "nunit.consolerunner/3.19.0",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "NOTICES.txt",
+        "images/nunit_256.png",
+        "nunit.consolerunner.3.19.0.nupkg.sha512",
+        "nunit.consolerunner.nuspec",
+        "tools/agents/net462/nunit-agent-x86.exe",
+        "tools/agents/net462/nunit-agent-x86.exe.config",
+        "tools/agents/net462/nunit-agent.exe",
+        "tools/agents/net462/nunit-agent.exe.config",
+        "tools/agents/net462/nunit.engine.api.dll",
+        "tools/agents/net462/nunit.engine.api.xml",
+        "tools/agents/net462/nunit.engine.core.dll",
+        "tools/agents/net462/testcentric.engine.metadata.dll",
+        "tools/agents/net6.0/Microsoft.Extensions.DependencyModel.dll",
+        "tools/agents/net6.0/nunit-agent.deps.json",
+        "tools/agents/net6.0/nunit-agent.dll",
+        "tools/agents/net6.0/nunit-agent.dll.config",
+        "tools/agents/net6.0/nunit-agent.runtimeconfig.json",
+        "tools/agents/net6.0/nunit.engine.api.dll",
+        "tools/agents/net6.0/nunit.engine.api.xml",
+        "tools/agents/net6.0/nunit.engine.core.dll",
+        "tools/agents/net6.0/testcentric.engine.metadata.dll",
+        "tools/agents/net7.0/Microsoft.Extensions.DependencyModel.dll",
+        "tools/agents/net7.0/nunit-agent.deps.json",
+        "tools/agents/net7.0/nunit-agent.dll",
+        "tools/agents/net7.0/nunit-agent.dll.config",
+        "tools/agents/net7.0/nunit-agent.runtimeconfig.json",
+        "tools/agents/net7.0/nunit.engine.api.dll",
+        "tools/agents/net7.0/nunit.engine.api.xml",
+        "tools/agents/net7.0/nunit.engine.core.dll",
+        "tools/agents/net7.0/testcentric.engine.metadata.dll",
+        "tools/agents/net8.0/Microsoft.Extensions.DependencyModel.dll",
+        "tools/agents/net8.0/nunit-agent.deps.json",
+        "tools/agents/net8.0/nunit-agent.dll",
+        "tools/agents/net8.0/nunit-agent.dll.config",
+        "tools/agents/net8.0/nunit-agent.runtimeconfig.json",
+        "tools/agents/net8.0/nunit.engine.api.dll",
+        "tools/agents/net8.0/nunit.engine.api.xml",
+        "tools/agents/net8.0/nunit.engine.core.dll",
+        "tools/agents/net8.0/testcentric.engine.metadata.dll",
+        "tools/agents/netcoreapp3.1/Microsoft.Extensions.DependencyModel.dll",
+        "tools/agents/netcoreapp3.1/nunit-agent.deps.json",
+        "tools/agents/netcoreapp3.1/nunit-agent.dll",
+        "tools/agents/netcoreapp3.1/nunit-agent.dll.config",
+        "tools/agents/netcoreapp3.1/nunit-agent.runtimeconfig.json",
+        "tools/agents/netcoreapp3.1/nunit.engine.api.dll",
+        "tools/agents/netcoreapp3.1/nunit.engine.api.xml",
+        "tools/agents/netcoreapp3.1/nunit.engine.core.dll",
+        "tools/agents/netcoreapp3.1/testcentric.engine.metadata.dll",
+        "tools/nunit.engine.api.dll",
+        "tools/nunit.engine.api.xml",
+        "tools/nunit.engine.core.dll",
+        "tools/nunit.engine.dll",
+        "tools/nunit3-console.exe",
+        "tools/nunit3-console.exe.config",
+        "tools/testcentric.engine.metadata.dll"
       ]
     },
     "NUnit3TestAdapter/4.6.0": {
@@ -1768,7 +1906,9 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "Microsoft.Data.SqlClient >= 5.2.2",
+      "Moq >= 4.20.72",
       "NUnit >= 4.3.2",
+      "NUnit.ConsoleRunner >= 3.19.0",
       "NUnit3TestAdapter >= 4.6.0"
     ]
   },
@@ -1827,9 +1967,17 @@
             "target": "Package",
             "version": "[5.2.2, )"
           },
+          "Moq": {
+            "target": "Package",
+            "version": "[4.20.72, )"
+          },
           "NUnit": {
             "target": "Package",
             "version": "[4.3.2, )"
+          },
+          "NUnit.ConsoleRunner": {
+            "target": "Package",
+            "version": "[3.19.0, )"
           },
           "NUnit3TestAdapter": {
             "target": "Package",

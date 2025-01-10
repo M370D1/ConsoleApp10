@@ -19,7 +19,7 @@ namespace ConsoleApp10.Services
             var product = _productRepository.GetProductById(order.ProductId);
             if (product == null || product.Stock < order.Quantity)
             {
-                throw new ArgumentException("Insufficient stock.");
+                throw new InvalidOperationException("Insufficient stock.");
             }
 
             product.Stock -= order.Quantity;
