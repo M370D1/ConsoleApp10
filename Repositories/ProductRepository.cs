@@ -62,7 +62,7 @@ namespace ConsoleApp10.Repositories
         {
             using var connection = new SqlConnection(_connectionString);
             connection.Open();
-            var query = "INSERT INTO Products (Name, Price, Stock) VALUES (@Name, @Price, @Stock)";
+            var query = "INSERT INTO Products ( Name, Price, Stock) VALUES ( @Name, @Price, @Stock)";
             using var command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@Name", product.Name);
             command.Parameters.AddWithValue("@Price", product.Price);

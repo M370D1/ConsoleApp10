@@ -26,12 +26,6 @@ namespace ConsoleApp10.Repositories
                 command.Parameters.AddWithValue("@OrderDate", order.OrderDate);
                 command.ExecuteNonQuery();
             }
-
-            var updateStockQuery = "UPDATE Products SET Stock = Stock - @Quantity WHERE ProductId = @ProductId";
-            using var updateCommand = new SqlCommand(updateStockQuery, connection);
-            updateCommand.Parameters.AddWithValue("@Quantity", order.Quantity);
-            updateCommand.Parameters.AddWithValue("@ProductId", order.ProductId);
-            updateCommand.ExecuteNonQuery();
         }
 
         public IEnumerable<Order> GetOrders()

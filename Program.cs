@@ -17,15 +17,15 @@ namespace ConsoleApp10
             var orderService = new OrderService(orderRepository, productRepository);
 
             // Example: Adding a product
-            var newProduct = new Product { Name = "Tablet", Price = 499.99m, Stock = 20 };
-            var newPeoduct2 = new Product { Name = "PlayStation5", Price = 1400m, Stock = 1 };
-            productService.AddProduct(newProduct);
-            productService.AddProduct(newPeoduct2);
+            //var newProduct = new Product { Name = "Tablet", Price = 499.99m, Stock = 20 };
+            //var newPeoduct2 = new Product { Name = "PlayStation5", Price = 1400m, Stock = 1 };
+            //productService.AddProduct(newProduct);
+            //productService.AddProduct(newPeoduct2);
 
 
             // Example: Placing an order
-            var newOrder = new Order { ProductId = 1, Quantity = 2, OrderDate = DateTime.Now };
-            orderService.PlaceOrder(newOrder);
+            //var newOrder = new Order { ProductId = 1, Quantity = 2, OrderDate = DateTime.Now };
+            //orderService.PlaceOrder(newOrder);
 
             // Display all products
             var products = productService.GetAllProducts();
