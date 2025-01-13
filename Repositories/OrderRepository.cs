@@ -16,18 +16,22 @@ namespace ConsoleApp10.Repositories
 
         public void PlaceOrder(Order order)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using var connection = new SqlConnection(_connectionString);
+            connection.Open();
+            var query = "INSERT INTO Orders (ProductId, Quantity, OrderDate) VALUES (@ProductId, @Quantity, @OrderDate)";
+            using (var command = new SqlCommand(query, connection))
             {
-                connection.Open();
-                var query = "INSERT INTO Orders (ProductId, Quantity, OrderDate) VALUES (@ProductId, @Quantity, @OrderDate)";
-                using (var command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@ProductId", order.ProductId);
-                    command.Parameters.AddWithValue("@Quantity", order.Quantity);
-                    command.Parameters.AddWithValue("@OrderDate", order.OrderDate);
-                    command.ExecuteNonQuery();
-                }
+                command.Parameters.AddWithValue("@ProductId", order.ProductId);
+                command.Parameters.AddWithValue("@Quantity", order.Quantity);
+                command.Parameters.AddWithValue("@OrderDate", order.OrderDate);
+                command.ExecuteNonQuery();
             }
+
+            var updateStockQuery = "UPDATE Products SET Stock = Stock - @Quantity WHERE ProductId = @ProductId";
+            using var updateCommand = new SqlCommand(updateStockQuery, connection);
+            updateCommand.Parameters.AddWithValue("@Quantity", order.Quantity);
+            updateCommand.Parameters.AddWithValue("@ProductId", order.ProductId);
+            updateCommand.ExecuteNonQuery();
         }
 
         public IEnumerable<Order> GetOrders()
@@ -37,19 +41,17 @@ namespace ConsoleApp10.Repositories
             {
                 connection.Open();
                 var query = "SELECT OrderId, ProductId, Quantity, OrderDate FROM Orders";
-                using (var command = new SqlCommand(query, connection))
-                using (var reader = command.ExecuteReader())
+                using var command = new SqlCommand(query, connection);
+                using var reader = command.ExecuteReader();
+                while (reader.Read())
                 {
-                    while (reader.Read())
+                    orders.Add(new Order
                     {
-                        orders.Add(new Order
-                        {
-                            OrderId = (int)reader["OrderId"],
-                            ProductId = (int)reader["ProductId"],
-                            Quantity = (int)reader["Quantity"],
-                            OrderDate = (DateTime)reader["OrderDate"]
-                        });
-                    }
+                        OrderId = (int)reader["OrderId"],
+                        ProductId = (int)reader["ProductId"],
+                        Quantity = (int)reader["Quantity"],
+                        OrderDate = (DateTime)reader["OrderDate"]
+                    });
                 }
             }
             return orders;
@@ -57,27 +59,21 @@ namespace ConsoleApp10.Repositories
 
         public Order GetOrderById(int orderId)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using var connection = new SqlConnection(_connectionString);
+            connection.Open();
+            var query = "SELECT OrderId, ProductId, Quantity, OrderDate FROM Orders WHERE OrderId = @OrderId";
+            using var command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@OrderId", orderId);
+            using var reader = command.ExecuteReader();
+            if (reader.Read())
             {
-                connection.Open();
-                var query = "SELECT OrderId, ProductId, Quantity, OrderDate FROM Orders WHERE OrderId = @OrderId";
-                using (var command = new SqlCommand(query, connection))
+                return new Order
                 {
-                    command.Parameters.AddWithValue("@OrderId", orderId);
-                    using (var reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            return new Order
-                            {
-                                OrderId = (int)reader["OrderId"],
-                                ProductId = (int)reader["ProductId"],
-                                Quantity = (int)reader["Quantity"],
-                                OrderDate = (DateTime)reader["OrderDate"]
-                            };
-                        }
-                    }
-                }
+                    OrderId = (int)reader["OrderId"],
+                    ProductId = (int)reader["ProductId"],
+                    Quantity = (int)reader["Quantity"],
+                    OrderDate = (DateTime)reader["OrderDate"]
+                };
             }
             return null;
         }

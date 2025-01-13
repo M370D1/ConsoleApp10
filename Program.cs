@@ -8,7 +8,7 @@ namespace ConsoleApp10
     {
         static void Main(string[] args)
         {
-            string connectionString = "Server=DESKTOP-B9L4A11;Database=MyDataBase;Trusted_Connection=True;TrustServerCertificate=True;";
+            string connectionString = ConnectionConfig.DefaultConnection;
 
             var productRepository = new ProductRepository(connectionString);
             var orderRepository = new OrderRepository(connectionString);

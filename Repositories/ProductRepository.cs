@@ -21,19 +21,17 @@ namespace ConsoleApp10.Repositories
             {
                 connection.Open();
                 var query = "SELECT ProductId, Name, Price, Stock FROM Products";
-                using (var command = new SqlCommand(query, connection))
-                using (var reader = command.ExecuteReader())
+                using var command = new SqlCommand(query, connection);
+                using var reader = command.ExecuteReader();
+                while (reader.Read())
                 {
-                    while (reader.Read())
+                    products.Add(new Product
                     {
-                        products.Add(new Product
-                        {
-                            ProductId = (int)reader["ProductId"],
-                            Name = (string)reader["Name"],
-                            Price = (decimal)reader["Price"],
-                            Stock = (int)reader["Stock"]
-                        });
-                    }
+                        ProductId = (int)reader["ProductId"],
+                        Name = (string)reader["Name"],
+                        Price = (decimal)reader["Price"],
+                        Stock = (int)reader["Stock"]
+                    });
                 }
             }
             return products;
@@ -41,76 +39,58 @@ namespace ConsoleApp10.Repositories
 
         public Product GetProductById(int productId)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using var connection = new SqlConnection(_connectionString);
+            connection.Open();
+            var query = "SELECT ProductId, Name, Price, Stock FROM Products WHERE ProductId = @ProductId";
+            using var command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@ProductId", productId);
+            using var reader = command.ExecuteReader();
+            if (reader.Read())
             {
-                connection.Open();
-                var query = "SELECT ProductId, Name, Price, Stock FROM Products WHERE ProductId = @ProductId";
-                using (var command = new SqlCommand(query, connection))
+                return new Product
                 {
-                    command.Parameters.AddWithValue("@ProductId", productId);
-                    using (var reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            return new Product
-                            {
-                                ProductId = (int)reader["ProductId"],
-                                Name = (string)reader["Name"],
-                                Price = (decimal)reader["Price"],
-                                Stock = (int)reader["Stock"]
-                            };
-                        }
-                    }
-                }
+                    ProductId = (int)reader["ProductId"],
+                    Name = (string)reader["Name"],
+                    Price = (decimal)reader["Price"],
+                    Stock = (int)reader["Stock"]
+                };
             }
             return null;
         }
 
         public void AddProduct(Product product)
         {
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                var query = "INSERT INTO Products (Name, Price, Stock) VALUES (@Name, @Price, @Stock)";
-                using (var command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Name", product.Name);
-                    command.Parameters.AddWithValue("@Price", product.Price);
-                    command.Parameters.AddWithValue("@Stock", product.Stock);
-                    command.ExecuteNonQuery();
-                }
-            }
+            using var connection = new SqlConnection(_connectionString);
+            connection.Open();
+            var query = "INSERT INTO Products (Name, Price, Stock) VALUES (@Name, @Price, @Stock)";
+            using var command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@Name", product.Name);
+            command.Parameters.AddWithValue("@Price", product.Price);
+            command.Parameters.AddWithValue("@Stock", product.Stock);
+            command.ExecuteNonQuery();
         }
 
         public void UpdateProduct(Product product)
         {
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                var query = "UPDATE Products SET Name = @Name, Price = @Price, Stock = @Stock WHERE ProductId = @ProductId";
-                using (var command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@ProductId", product.ProductId);
-                    command.Parameters.AddWithValue("@Name", product.Name);
-                    command.Parameters.AddWithValue("@Price", product.Price);
-                    command.Parameters.AddWithValue("@Stock", product.Stock);
-                    command.ExecuteNonQuery();
-                }
-            }
+            using var connection = new SqlConnection(_connectionString);
+            connection.Open();
+            var query = "UPDATE Products SET Name = @Name, Price = @Price, Stock = @Stock WHERE ProductId = @ProductId";
+            using var command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@ProductId", product.ProductId);
+            command.Parameters.AddWithValue("@Name", product.Name);
+            command.Parameters.AddWithValue("@Price", product.Price);
+            command.Parameters.AddWithValue("@Stock", product.Stock);
+            command.ExecuteNonQuery();
         }
 
         public void DeleteProduct(int productId)
         {
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                var query = "DELETE FROM Products WHERE ProductId = @ProductId";
-                using (var command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@ProductId", productId);
-                    command.ExecuteNonQuery();
-                }
-            }
+            using var connection = new SqlConnection(_connectionString);
+            connection.Open();
+            var query = "DELETE FROM Products WHERE ProductId = @ProductId";
+            using var command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@ProductId", productId);
+            command.ExecuteNonQuery();
         }
     }
 }
