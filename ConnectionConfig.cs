@@ -2,6 +2,6 @@
 {
     public static class ConnectionConfig
     {
-        public const string DefaultConnection = "Server = DESKTOP-B9L4A11; Database=MyDataBase;Trusted_Connection=True;TrustServerCertificate=True;";
+        public const string DefaultConnection = "Server = MetoPC; Database=MyDataBase;Trusted_Connection=True;TrustServerCertificate=True;";
     }
 }
